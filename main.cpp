@@ -25,6 +25,7 @@ unsigned imageWidth;  // image width and height
 unsigned imageHeight;
 GLuint texname;
 float scale=1.0;
+float dx=0.0,dy=0.0;
 /** Sets current texture to given image
     @param img is image vector that has already been loaded
     @param width is width of the image
@@ -108,7 +109,7 @@ static void display(void)
     glEnable(GL_TEXTURE_2D);
     setTexture(image,imageWidth,imageHeight);
     glPushMatrix();
-    glTranslatef(WIDTH/2.0-(imageWidth*scale/2.0),HEIGHT/2.0-(imageHeight*scale/2.0),0);
+    glTranslatef(WIDTH/2.0-(imageWidth*scale/2.0)+dx,HEIGHT/2.0-(imageHeight*scale/2.0)+dy,0);
     glScalef(scale,scale,1);
     glBegin(GL_POLYGON);
         glTexCoord2d(0,0);  glVertex2f(0,0);
@@ -128,10 +129,30 @@ static void key(unsigned char key,int x,int y)
         exit(0);
         break;
     case '+':
+        if(scale<30.0)
         scale+=.1;
         break;
     case '-':
+        if(scale>.1)
         scale-=.1;
+        break;
+    }
+}
+static void splkey(int key,int x,int y)
+{
+    switch(key)
+    {
+    case GLUT_KEY_UP:
+        dy-=5;
+        break;
+    case GLUT_KEY_DOWN:
+        dy+=5;
+        break;
+    case GLUT_KEY_LEFT:
+        dx+=5;
+        break;
+    case GLUT_KEY_RIGHT:
+        dx-=5;
         break;
     }
 }
@@ -158,6 +179,7 @@ int main(int argc, char *argv[])
     glutReshapeFunc(resize);
     glutDisplayFunc(display);
     glutKeyboardFunc(key);
+    glutSpecialFunc(splkey);
     glutIdleFunc(idle);
     glutMainLoop();
     return EXIT_SUCCESS;
