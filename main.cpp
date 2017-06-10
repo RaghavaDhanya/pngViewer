@@ -33,7 +33,6 @@ float dx=0.0,dy=0.0;
 */
 void setTexture(vector<unsigned char> img, unsigned width, unsigned height)
 {
-    glGenTextures(1, &texname);
     glBindTexture(GL_TEXTURE_2D, texname);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -129,11 +128,11 @@ static void key(unsigned char key,int x,int y)
         exit(0);
         break;
     case '+':
-        if(scale<30.0)
+        //if(scale<30.0)
         scale+=.1;
         break;
     case '-':
-        if(scale>.1)
+        //if(scale>.1)
         scale-=.1;
         break;
     }
@@ -169,6 +168,7 @@ int main(int argc, char *argv[])
      return 1;
     }
     loadImage(argv[1]);
+	glGenTextures(1, &texname);
     glutInit(&argc, argv);
     glutInitWindowSize(WIDTH,HEIGHT);
     glutInitWindowPosition(10,10);
