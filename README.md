@@ -1,5 +1,6 @@
 # pngViewer
 [![Build Status](https://travis-ci.org/RaghavaDhanya/pngViewer.svg?branch=master)](https://travis-ci.org/RaghavaDhanya/pngViewer)
+[![License](https://img.shields.io/badge/license-MIT%20License-blue.svg)](https://github.com/RaghavaDhanya/pngViewer/blob/master/LICENSE)
 > Demo: Using PNG images as textures in openGL
 
 ### Lodepng 
